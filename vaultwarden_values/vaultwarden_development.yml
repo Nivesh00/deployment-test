@@ -1,0 +1,11 @@
+replicas: 1
+
+resources:
+  requests:
+    memory: 50Mi
+    cpu: 50m
+  limits:
+    memory: 250Mi
+    cpu: 200m
+
+domain: https://localhost:8080

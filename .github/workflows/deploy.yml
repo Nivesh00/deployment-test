@@ -1,0 +1,30 @@
+# .github/workflows/deploy.yml
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: "development"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Save kubeconfig info
+        shell: bash
+        run: >-
+          echo ${{ secrets.KUBECONFIG }} | base64 -d > /tmp/config
+
+      - name: Add Helm Repo
+        shell: bash
+        run: >-
+          helm --kubeconfig /tmp/config helm repo add ${{ env.VW_HELM_CHART }} https://guerzon.github.io/vaultwarden
+
+      - name: Install or Upgrade Vaultwarden
+        shell: bash
+        run: >-
+          helm --kubeconfig /tmp/config --namespace ${{ env.K8S_NAMESPACE }} upgrade ${{ env.VW_HELM_RELEASE }} ${{ env.VW_HELM_CHART }} --values vaultwarden_values/vaultwarden.yml --values vaultwarden_values/vaultwarden_development.yml --set adminToken.value=${{ secrets.ADMIN_TOKEN }} --version {{ env.VW_HELM_VERSION }} --install --cleanup-on-fail --wait
