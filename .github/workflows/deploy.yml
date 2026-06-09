@@ -8,12 +8,13 @@ on:
 
 env:
   KUBECONFIG_DIR: ./.kube
-  KUBECONFIG: ${{ env.KUBECONFIG_DIR }}/config
 
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
     environment: "development"
+    env:
+      KUBECONFIG: ${{ env.KUBECONFIG_DIR }}/config
     steps:
       - name: Checkout
         uses: actions/checkout@v6
