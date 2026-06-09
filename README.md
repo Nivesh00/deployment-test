@@ -1,5 +1,5 @@
 # Vaultwarden Deployment
-
+```
 ├── ansible-deployment `Ansible Deployment files`
 │   ├── default_inventory.yml `Structure for an inventory file`
 │   ├── install_ansible.sh `Script to install Python ansibble modules`
@@ -10,7 +10,7 @@
 │   └── vars `General vars file for Playbook`
 ├── README.md
 └── vaultwarden_values `Helm values for Github Actions`
-
+```
 ## Requirements
 
 - Ansible must be installed. For required Python modules, script [install_ansible.sh](./ansible-deployment/install_ansible.sh) can be run (Edit the top variables in the file depending on whether or not a virtual python environment is used)
