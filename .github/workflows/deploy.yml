@@ -17,7 +17,7 @@ jobs:
       - name: Save kubeconfig info
         shell: bash
         run: >-
-          echo ${{ secrets.KUBECONFIG }} | base64 -d > /tmp/config
+          echo ${{ secrets.KUBECONFIG }} > /tmp/config
 
       - name: Add Helm Repo
         shell: bash
