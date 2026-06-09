@@ -21,7 +21,7 @@ jobs:
       - name: Write Kubeconfig to File
         shell: bash
         run: |-
-          mkdir ${{ env.KUBECONFIG }}
+          mkdir ${{ env.KUBECONFIG_DIR }}
           echo "${{ secrets.KUBECONFIG_RAW }}" > ${{ env.KUBECONFIG }}
 
       - name: Add Helm Repo
