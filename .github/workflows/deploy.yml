@@ -27,7 +27,7 @@ jobs:
       - name: Add Helm Repo
         shell: bash
         run: >-
-          helm --kubeconfig ${{ env.KUBECONFIG }} helm repo add ${{ vars.VW_HELM_CHART }} https://guerzon.github.io/vaultwarden
+          helm --kubeconfig ${{ env.KUBECONFIG }} repo add ${{ vars.VW_HELM_CHART }} https://guerzon.github.io/vaultwarden
 
       - name: Install or Upgrade Vaultwarden
         shell: bash
