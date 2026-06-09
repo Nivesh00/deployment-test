@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+env:
+  KUBECONFIG: /tmp/config
+
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
@@ -16,15 +19,20 @@ jobs:
 
       - name: Save kubeconfig info
         shell: bash
-        run: >-
-          echo ${{ secrets.KUBECONFIG }} > ./config
+        run: |
+          echo ${{ secrets.KUBECONFIG }} > $KUBECONFIG
 
       - name: Add Helm Repo
         shell: bash
-        run: >-
-          helm --kubeconfig ./config helm repo add ${{ env.VW_HELM_CHART }} https://guerzon.github.io/vaultwarden
+        run: |
+          helm --kubeconfig $KUBECONFIG helm repo add ${{ env.VW_HELM_CHART }} https://guerzon.github.io/vaultwarden
 
       - name: Install or Upgrade Vaultwarden
         shell: bash
-        run: >-
-          helm --kubeconfig ./config --namespace ${{ env.K8S_NAMESPACE }} upgrade ${{ env.VW_HELM_RELEASE }} ${{ env.VW_HELM_CHART }} --values vaultwarden_values/vaultwarden.yml --values vaultwarden_values/vaultwarden_development.yml --set adminToken.value=${{ secrets.ADMIN_TOKEN }} --version {{ env.VW_HELM_VERSION }} --install --cleanup-on-fail --wait
+        run: |
+          helm --kubeconfig $KUBECONFIG --namespace ${{ env.K8S_NAMESPACE }} upgrade \
+          ${{ env.VW_HELM_RELEASE }} ${{ env.VW_HELM_CHART }} \
+          --values vaultwarden_values/vaultwarden.yml --values vaultwarden_values/vaultwarden_development.yml \
+          --set adminToken.value=${{ secrets.ADMIN_TOKEN }} \
+          --version {{ env.VW_HELM_VERSION }} \
+          --install --cleanup-on-fail --wait
