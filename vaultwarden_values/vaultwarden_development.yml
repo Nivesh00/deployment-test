@@ -8,4 +8,13 @@ resources:
     memory: 250Mi
     cpu: 200m
 
+storage:
+  data:
+    name: "vaultwarden-data"
+    size: 2Gi
+    class: default
+    path: "/data"
+    keepPvc: false
+    accessMode: "ReadWriteOnce"
+
 domain: https://localhost:8080

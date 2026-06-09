@@ -2,7 +2,7 @@
 
 ## User defined vars
 USE_VENV=true # Use virtual environmnet for python
-VENV_DIR=/home/nivesh/Projects/deployment-test/.venv # /path/to/venv/dir
+VENV_DIR= # /path/to/venv/dir
 
 ## Scripts
 VENV_ACTIVATE="$VENV_DIR/bin/activate"
