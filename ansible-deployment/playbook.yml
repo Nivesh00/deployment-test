@@ -1,0 +1,14 @@
+- name: Install K3S
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - vars/00_default.yml
+    - vars/01_software_references.yml
+    - vars/01_software_resources.yml
+
+  tasks:
+    - name: Install Vault Warden
+      ansible.builtin.import_tasks: tasks/00_vaultwarden.yml
+      when: inv_vaultwarden is defined and inv_vaultwarden.enable
+      tags: [vaultwarden]

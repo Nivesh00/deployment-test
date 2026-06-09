@@ -1,0 +1,3 @@
+# Kubernetes defaults
+K8S_CONFIG: '{{ inv_k8s.kubeconfig }}'
+K8S_CONTEXT: '{{ inv_k8s.context }}'

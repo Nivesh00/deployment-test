@@ -1,0 +1,18 @@
+- name: Prepare Vaultwarden deployment
+  ansible.builtin.import_tasks: tasks/templates/prepare_deployment.yml
+  vars:
+    k8s_namespace: '{{ inv_vaultwarden.namespace }}'
+    k8s_component: Vaultwarden
+
+- name: Install Vaultwarden
+  ansible.builtin.import_tasks: tasks/templates/helm.yml
+  vars:
+    helm_repo_name: '{{ ref_vaultwarden.helm.repo_name }}'
+    helm_repo_url: '{{ ref_vaultwarden.helm.repo_url }}'
+    helm_release_namespace: '{{ k8s_namespace }}'
+    helm_release_name: '{{ ref_vaultwarden.helm.release_name }}'
+    helm_chart_ref: '{{ ref_vaultwarden.helm.repo_name }}/{{ ref_vaultwarden.helm.chart_name }}'
+    helm_chart_version: '{{ ref_vaultwarden.helm.chart_version }}'
+    helm_create_namespace: false
+    helm_values_file: 'templates/00_vaultwarden/vaultwarden_values.yml'
+    helm_wait: true

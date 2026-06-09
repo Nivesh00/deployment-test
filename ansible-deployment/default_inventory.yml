@@ -1,0 +1,30 @@
+all:
+  vars:
+    ENVIRONMENT: stg # e.g. dev, stg, prd
+    DOMAIN: localhost
+
+  children:
+    servers:
+      hosts:
+        localhost:
+          ansible_host: 127.0.0.1
+          ansible_connection: local
+          ansible_python_interpreter: /usr/bin/python3
+
+      vars:
+        # Kubernetes specific
+        inv_k8s:
+          kubeconfig: /home/user/path/to/kubeconfig # full path to kubeconfig
+          context: default
+          storage_class:
+            rwo: default
+            rwx: default
+
+        # Vaultwarden stack
+        inv_vaultwarden:
+          enable: true
+          namespace: "{{ ENVIRONMENT }}-vaultwarden-stack"
+          admin_token: change_token_before_use # https://github.com/kagiko/vaultwarden-wiki/blob/master/Enabling-admin-page.md
+          domain: http://{{ DOMAIN }}:8080
+          replicas: 1
+          storage_size: 5Gi

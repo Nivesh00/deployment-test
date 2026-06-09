@@ -1,0 +1,11 @@
+ref_vaultwarden:
+  helm:
+    repo_url: https://guerzon.github.io/vaultwarden
+    repo_name: vaultwarden
+    chart_name: vaultwarden
+    chart_version: 0.38.0
+    release_name: vaultwarden
+  image:
+    registry: docker.io
+    repo: vaultwarden/server
+    tag: 1.36.0-alpine
