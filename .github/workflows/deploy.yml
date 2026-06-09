@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: |-
           mkdir ${{ env.KUBECONFIG_DIR }}
-          echo ${{ secrets.KUBECONFIG_RAW }} > ${{ env.KUBECONFIG }}
+          echo "${{ secrets.KUBECONFIG_RAW }}" > ${{ env.KUBECONFIG }}
 
       - name: Add Helm Repo
         shell: bash
