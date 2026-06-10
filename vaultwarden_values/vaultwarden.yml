@@ -1,4 +1,35 @@
-image:
-  registry: docker.io
-  repository: vaultwarden/server
-  tag: "1.36.0-alpine"
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 10
+  path: /alive
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  path: /alive
+
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 5
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 10
+  path: /alive
+
+ingress:
+  enabled: false
+
+httpRoute:
+  enabled: false
+
+sso:
+  enabled: false

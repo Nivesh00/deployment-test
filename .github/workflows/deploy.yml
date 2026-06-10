@@ -32,4 +32,4 @@ jobs:
       - name: Install or Upgrade Vaultwarden
         shell: bash
         run: >-
-          helm --kubeconfig ${{ env.KUBECONFIG }} --namespace ${{ vars.K8S_NAMESPACE }} upgrade ${{ vars.VW_HELM_RELEASE }} ${{ vars.VW_HELM_REPO }}/${{ vars.VW_HELM_CHART }} --values vaultwarden_values/vaultwarden.yml --values vaultwarden_values/vaultwarden_development.yml --set adminToken.value=${{ secrets.ADMIN_TOKEN }} --version ${{ vars.VW_HELM_VERSION }} --create-namespace --install --cleanup-on-fail --wait
+          helm --kubeconfig ${{ env.KUBECONFIG }} --namespace ${{ vars.K8S_NAMESPACE }} upgrade ${{ vars.VW_HELM_RELEASE }} ${{ vars.VW_HELM_REPO }}/${{ vars.VW_HELM_CHART }} --values vaultwarden_values/vaultwarden.yml --values vaultwarden_values/vaultwarden_development.yml --set adminToken.value=${{ secrets.ADMIN_TOKEN }} --set domain=${{ vars.VW_DOMAIN }} --version ${{ vars.VW_HELM_VERSION }} --create-namespace --install --cleanup-on-fail --wait

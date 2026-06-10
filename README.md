@@ -13,7 +13,7 @@
 ```
 ## Requirements
 
-- Ansible must be installed. For required Python modules, script [install_ansible.sh](./ansible-deployment/install_ansible.sh) can be run (Edit the top variables in the file depending on whether or not a virtual python environment is used)
+- Ansible must be installed. For required Python modules, script [install_ansible.sh](./ansible-deployment/install_ansible.sh) can be ran (Edit the top variables in the file depending on whether or not a virtual python environment is used)
 
 ## Github Action Deployment
 
@@ -31,7 +31,7 @@
 
 - Values can be changed depending on setup
 
-- Following command can be run
+- Following command can be ran
     ```sh
     ansible-playbook -i .inventory/inventory.yml ansible-deployment/playbook.yml
     ```
@@ -49,6 +49,7 @@
 - Security context for pods in the helm values
 - Strategy for updates of pods should be configured
 - Connect with GatewayAPI/Ingress Controller and a TLS Certificate Manager (e.g. Cert Manager)
+- Look further into Helm Chart used
 
 ### Improvements to Application
 
