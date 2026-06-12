@@ -17,6 +17,7 @@
   kubernetes.core.helm_plugin:
     plugin_path: "https://github.com/databus23/helm-diff"
     state: present
+    verify: false
 
 - name: Add helm repository {{ helm_repo_name }}
   kubernetes.core.helm_repository:
